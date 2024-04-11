@@ -1,10 +1,10 @@
 namespace WeatherMonitoringSystem;
 public class CurrentConditionsDisplay : IDisplay
-{
-     private double temperature;
-        private double humidity;
-        private double pressure;
-    private readonly string additionalInformation;
+    {
+        /// <summary>
+        /// Additional information to be displayed
+        /// </summary>
+        private readonly string additionalInformation;
 
         public CurrentConditionsDisplay(string additionalInformation)
         {
@@ -13,7 +13,7 @@ public class CurrentConditionsDisplay : IDisplay
 
         public void Display()
         {
-            
+            /// Display additional information along with weather conditions
             Console.WriteLine("Additional Information: " + additionalInformation);
             Console.WriteLine("Current conditions:");
             
@@ -22,8 +22,6 @@ public class CurrentConditionsDisplay : IDisplay
         public void Update(double temperature, double humidity, double pressure)
         {
             
-            this.temperature = temperature;
-            this.humidity = humidity;
-            this.pressure = pressure;
+            Console.WriteLine($"Temperature: {temperature}°C, Humidity: {humidity}%, Pressure: {pressure}hPa");
         }
-}
+    } 

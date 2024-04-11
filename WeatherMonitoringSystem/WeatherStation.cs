@@ -1,19 +1,20 @@
 namespace WeatherMonitoringSystem;
 public class WeatherStation
-{
-    // Factory method to create different types of displays.
-    public IDisplay CreateDisplay(string displayType)
     {
-        switch (displayType)
+        // Step 1: Implement the Factory pattern
+        public IDisplay CreateDisplay(string displayType, string additionalInformation)
         {
-            case "CurrentConditions":
-                return new CurrentConditionsDisplay();
-            case "Statistics":
-                return new StatisticsDisplay();
-            case "Forecast":
-                return new ForecastDisplay();
-            default:
-                throw new ArgumentException("Invalid display type");
+            switch (displayType)
+            {
+                case "CurrentConditions":
+                    // Provide additional information when creating CurrentConditionsDisplay
+                    return new CurrentConditionsDisplay(additionalInformation);
+                case "Statistics":
+                    return new StatisticsDisplay();
+                case "Forecast":
+                    return new ForecastDisplay();
+                default:
+                    throw new ArgumentException("Invalid display type");
+            }
         }
     }
-}

@@ -5,16 +5,25 @@ class Program
 {
    static void Main(string[] args)
         {
-            WeatherData weatherData = new WeatherData();
+            ///<summary>
+            /// Create a WeatherData instance
+            /// </summary>
+            WeatherData weatherData = WeatherData.GetInstance();
             WeatherStation weatherStation = new WeatherStation();
+            IDisplay currentConditionsDisplay = weatherStation.CreateDisplay("CurrentConditions", "Additional Information Here");
+            ///<summary>
+            /// Create display objects
+            /// </summary>
+           
+            IDisplay statisticsDisplay = new StatisticsDisplay();
+            IDisplay forecastDisplay = new ForecastDisplay();
 
-            IDisplay currentConditionsDisplay = weatherStation.CreateDisplay("CurrentConditions", weatherData);
-            // Create other display objects as needed
+            /// Register display objects as observers
+            weatherData.RegisterObserver(currentConditionsDisplay);
+            weatherData.RegisterObserver(statisticsDisplay);
+            weatherData.RegisterObserver(forecastDisplay);
 
-            weatherData.SetData(80, 65, 30.4f);
-            weatherData.SetData(82, 70, 29.2f);
-            weatherData.SetData(78, 90, 29.2f);
-
-            currentConditionsDisplay.Show();
-            // Show other displays as needed
-        }}
+            /// Simulate weather data changes
+            weatherData.UpdateWeatherData();
+        }
+    }
